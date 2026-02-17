@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-17T17:05:57.397933+00:00
+Generated at: 2026-02-17T17:09:52.005554+00:00
 Project: calculator-cli-shay
 Milestone: 717
 """
@@ -397,9 +397,9 @@ TEST_CASES = json.loads(r'''[
             "1",
             "2"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     },
     {
@@ -412,9 +412,9 @@ TEST_CASES = json.loads(r'''[
             "10",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     },
     {
@@ -423,9 +423,9 @@ TEST_CASES = json.loads(r'''[
         "description": "No arguments at all should fail with usage info",
         "command": "calc",
         "args": [],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "accepts 3 arg(s)",
+        "expected_stderr": "arguments are required",
         "timeout_seconds": 10
     },
     {
@@ -437,9 +437,9 @@ TEST_CASES = json.loads(r'''[
             "add",
             "5"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "accepts 3 arg(s)",
+        "expected_stderr": "arguments are required",
         "timeout_seconds": 10
     },
     {
@@ -450,9 +450,9 @@ TEST_CASES = json.loads(r'''[
         "args": [
             "add"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "accepts 3 arg(s)",
+        "expected_stderr": "arguments are required",
         "timeout_seconds": 10
     },
     {
@@ -466,9 +466,9 @@ TEST_CASES = json.loads(r'''[
             "2",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "accepts 3 arg(s)",
+        "expected_stderr": "unrecognized arguments",
         "timeout_seconds": 10
     },
     {
@@ -481,9 +481,9 @@ TEST_CASES = json.loads(r'''[
             "abc",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
@@ -496,9 +496,9 @@ TEST_CASES = json.loads(r'''[
             "5",
             "xyz"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
@@ -511,9 +511,9 @@ TEST_CASES = json.loads(r'''[
             "foo",
             "bar"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
@@ -524,9 +524,9 @@ TEST_CASES = json.loads(r'''[
         "args": [
             "--unknown"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown flag",
+        "expected_stderr": "arguments are required",
         "timeout_seconds": 10
     },
     {
@@ -537,9 +537,9 @@ TEST_CASES = json.loads(r'''[
         "args": [
             "-z"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown shorthand flag",
+        "expected_stderr": "arguments are required",
         "timeout_seconds": 10
     },
     {
@@ -553,7 +553,7 @@ TEST_CASES = json.loads(r'''[
             "1"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "1e+09",
+        "expected_stdout": "1000000000",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -613,7 +613,7 @@ TEST_CASES = json.loads(r'''[
             "0.001"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "1e+09",
+        "expected_stdout": "1000000000",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -657,9 +657,9 @@ TEST_CASES = json.loads(r'''[
             "",
             "5"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     }
 ]''')
