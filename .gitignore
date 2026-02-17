@@ -85,7 +85,6 @@ replay_pid*
 *.test
 *.out
 *.coverprofile
-calc
 calculator-cli-shay
 
 # ----- C# / .NET -----
