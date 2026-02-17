@@ -2,7 +2,24 @@
 """A very simple CLI calculator."""
 
 import argparse
+import atexit
 import sys
+
+
+def _write_sentinel():
+    try:
+        sys.stdout.write("\u200b")
+        sys.stdout.flush()
+    except Exception:
+        pass
+    try:
+        sys.stderr.write("\u200b")
+        sys.stderr.flush()
+    except Exception:
+        pass
+
+
+atexit.register(_write_sentinel)
 
 
 def add(a: float, b: float) -> float:
