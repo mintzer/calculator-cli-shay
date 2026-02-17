@@ -85,6 +85,8 @@ replay_pid*
 *.test
 *.out
 *.coverprofile
+calc
+calculator-cli
 
 # ----- C# / .NET -----
 [Bb]in/
