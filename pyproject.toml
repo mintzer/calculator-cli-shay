@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "calculator-cli-shay"
+version = "1.0.1"
+description = "A simple CLI calculator"
+requires-python = ">=3.8"
+
+[project.scripts]
+calc = "calculator:main"
