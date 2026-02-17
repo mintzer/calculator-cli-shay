@@ -2,8 +2,31 @@ package main
 
 import (
 	"math"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
 	"testing"
 )
+
+var calcBinary string
+
+func TestMain(m *testing.M) {
+	dir, err := os.MkdirTemp("", "calc-test")
+	if err != nil {
+		panic(err)
+	}
+	defer os.RemoveAll(dir)
+
+	calcBinary = filepath.Join(dir, "calc")
+	cmd := exec.Command("go", "build", "-o", calcBinary, ".")
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		panic("failed to build calc binary: " + err.Error())
+	}
+
+	os.Exit(m.Run())
+}
 
 func TestAdd(t *testing.T) {
 	tests := []struct {
@@ -121,5 +144,154 @@ func TestDivide(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+// --- CLI Integration Tests ---
+
+func runCalc(args ...string) (stdout, stderr string, exitCode int) {
+	cmd := exec.Command(calcBinary, args...)
+	var outBuf, errBuf strings.Builder
+	cmd.Stdout = &outBuf
+	cmd.Stderr = &errBuf
+	err := cmd.Run()
+	exitCode = 0
+	if err != nil {
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			exitCode = exitErr.ExitCode()
+		} else {
+			exitCode = -1
+		}
+	}
+	return outBuf.String(), errBuf.String(), exitCode
+}
+
+func TestCLIAdd(t *testing.T) {
+	stdout, _, exitCode := runCalc("add", "5", "3")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if strings.TrimSpace(stdout) != "8" {
+		t.Fatalf("expected stdout %q, got %q", "8", strings.TrimSpace(stdout))
+	}
+}
+
+func TestCLISub(t *testing.T) {
+	stdout, _, exitCode := runCalc("sub", "10", "4")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if strings.TrimSpace(stdout) != "6" {
+		t.Fatalf("expected stdout %q, got %q", "6", strings.TrimSpace(stdout))
+	}
+}
+
+func TestCLIMul(t *testing.T) {
+	stdout, _, exitCode := runCalc("mul", "2.5", "4")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if strings.TrimSpace(stdout) != "10" {
+		t.Fatalf("expected stdout %q, got %q", "10", strings.TrimSpace(stdout))
+	}
+}
+
+func TestCLIDiv(t *testing.T) {
+	stdout, _, exitCode := runCalc("div", "20", "4")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if strings.TrimSpace(stdout) != "5" {
+		t.Fatalf("expected stdout %q, got %q", "5", strings.TrimSpace(stdout))
+	}
+}
+
+func TestCLIDivFractional(t *testing.T) {
+	stdout, _, exitCode := runCalc("div", "7", "2")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if strings.TrimSpace(stdout) != "3.5" {
+		t.Fatalf("expected stdout %q, got %q", "3.5", strings.TrimSpace(stdout))
+	}
+}
+
+func TestCLIDivideByZero(t *testing.T) {
+	_, stderr, exitCode := runCalc("div", "20", "0")
+	if exitCode == 0 {
+		t.Fatal("expected non-zero exit code for divide by zero")
+	}
+	if !strings.Contains(stderr, "Cannot divide by zero") {
+		t.Fatalf("expected stderr to contain %q, got %q", "Cannot divide by zero", stderr)
+	}
+}
+
+func TestCLIUnknownOperation(t *testing.T) {
+	_, stderr, exitCode := runCalc("foo", "1", "2")
+	if exitCode == 0 {
+		t.Fatal("expected non-zero exit code for unknown operation")
+	}
+	if !strings.Contains(stderr, "unknown operation") {
+		t.Fatalf("expected stderr to contain %q, got %q", "unknown operation", stderr)
+	}
+}
+
+func TestCLIMissingArguments(t *testing.T) {
+	_, stderr, exitCode := runCalc("add", "5")
+	if exitCode == 0 {
+		t.Fatal("expected non-zero exit code for missing arguments")
+	}
+	if stderr == "" {
+		t.Fatal("expected stderr output for missing arguments")
+	}
+}
+
+func TestCLIInvalidNumber(t *testing.T) {
+	_, stderr, exitCode := runCalc("add", "abc", "3")
+	if exitCode == 0 {
+		t.Fatal("expected non-zero exit code for invalid number")
+	}
+	if !strings.Contains(stderr, "invalid number") {
+		t.Fatalf("expected stderr to contain %q, got %q", "invalid number", stderr)
+	}
+}
+
+func TestCLIInvalidSecondNumber(t *testing.T) {
+	_, stderr, exitCode := runCalc("add", "3", "xyz")
+	if exitCode == 0 {
+		t.Fatal("expected non-zero exit code for invalid number")
+	}
+	if !strings.Contains(stderr, "invalid number") {
+		t.Fatalf("expected stderr to contain %q, got %q", "invalid number", stderr)
+	}
+}
+
+func TestCLINoArguments(t *testing.T) {
+	_, stderr, exitCode := runCalc()
+	if exitCode == 0 {
+		t.Fatal("expected non-zero exit code for no arguments")
+	}
+	if stderr == "" {
+		t.Fatal("expected stderr output for no arguments")
+	}
+}
+
+func TestCLIHelp(t *testing.T) {
+	stdout, _, exitCode := runCalc("--help")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0 for --help, got %d", exitCode)
+	}
+	if !strings.Contains(stdout, "calc") {
+		t.Fatalf("expected help output to contain %q, got %q", "calc", stdout)
+	}
+}
+
+func TestCLINegativeNumbers(t *testing.T) {
+	stdout, _, exitCode := runCalc("add", "-2", "-3")
+	if exitCode != 0 {
+		t.Fatalf("expected exit code 0, got %d", exitCode)
+	}
+	if strings.TrimSpace(stdout) != "-5" {
+		t.Fatalf("expected stdout %q, got %q", "-5", strings.TrimSpace(stdout))
 	}
 }
