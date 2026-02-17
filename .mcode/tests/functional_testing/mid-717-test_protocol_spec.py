@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-17T18:02:20.051325+00:00
+Generated at: 2026-02-17T18:10:21.732647+00:00
 Project: calculator-cli-shay
 Milestone: 717
 """
