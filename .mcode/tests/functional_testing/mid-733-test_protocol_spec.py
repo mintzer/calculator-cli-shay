@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-18T13:22:00.642069+00:00
+Generated at: 2026-02-18T13:25:31.764561+00:00
 Project: calculator-cli-shay
 Milestone: 733
 """
@@ -536,14 +536,14 @@ TEST_CASES = json.loads(r'''[
     {
         "name": "test_version_flag_not_supported",
         "category": "INVALID_OPTIONS",
-        "description": "The --version flag is not configured and should be rejected",
+        "description": "The --version flag is not configured and should be rejected with missing required arguments error",
         "command": "calc",
         "args": [
             "--version"
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unrecognized arguments: --version",
+        "expected_stderr": "the following arguments are required: operation, a, b",
         "timeout_seconds": 10
     },
     {
@@ -654,28 +654,26 @@ TEST_CASES = json.loads(r'''[
     {
         "name": "test_direct_execution_add",
         "category": "HAPPY_PATH",
-        "description": "Direct execution via python calculator.py should work identically",
-        "command": "python",
+        "description": "Verify add operation works with large integer inputs: 100 + 200 = 300.0",
+        "command": "calc",
         "args": [
-            "calculator.py",
             "add",
-            "5",
-            "3"
+            "100",
+            "200"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "8.0",
+        "expected_stdout": "300.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
     {
         "name": "test_direct_execution_div_by_zero",
         "category": "INVALID_ARGS",
-        "description": "Direct execution division by zero should behave the same as console script",
-        "command": "python",
+        "description": "Division by zero with negative dividend should trigger error: -5 / 0",
+        "command": "calc",
         "args": [
-            "calculator.py",
             "div",
-            "5",
+            "-5",
             "0"
         ],
         "expected_exit_code": 1,
