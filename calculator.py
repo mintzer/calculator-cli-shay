@@ -38,7 +38,7 @@ OPERATIONS: dict[str, Callable[[float, float], float]] = {
 
 def main() -> int:
     """Run the calculator CLI."""
-    parser = argparse.ArgumentParser(description="Simple CLI Calculator")
+    parser = argparse.ArgumentParser(prog="calc", description="Simple CLI Calculator")
     parser.add_argument("operation", choices=OPERATIONS.keys(), help="Operation to perform")
     parser.add_argument("a", type=float, help="First number")
     parser.add_argument("b", type=float, help="Second number")
