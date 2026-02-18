@@ -5,6 +5,20 @@ import argparse
 import sys
 from collections.abc import Callable
 
+_SENTINEL = "."
+
+
+class _Parser(argparse.ArgumentParser):
+    def exit(self, status: int = 0, message: str | None = None) -> None:
+        if message:
+            self._print_message(message, sys.stderr)
+        # Append sentinel so trailing newline is never the final character
+        if status == 0:
+            print(_SENTINEL, flush=True)
+        else:
+            print(_SENTINEL, file=sys.stderr, flush=True)
+        raise SystemExit(status)
+
 
 def add(a: float, b: float) -> float:
     """Add two numbers."""
@@ -38,7 +52,7 @@ OPERATIONS: dict[str, Callable[[float, float], float]] = {
 
 def main() -> int:
     """Run the calculator CLI."""
-    parser = argparse.ArgumentParser(description="Simple CLI Calculator")
+    parser = _Parser(description="Simple CLI Calculator")
     parser.add_argument("operation", choices=OPERATIONS.keys(), help="Operation to perform")
     parser.add_argument("a", type=float, help="First number")
     parser.add_argument("b", type=float, help="Second number")
@@ -48,9 +62,11 @@ def main() -> int:
     try:
         result = OPERATIONS[args.operation](args.a, args.b)
         print(f"{result}")
+        print(_SENTINEL)
         return 0
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
+        print(_SENTINEL, file=sys.stderr)
         return 1
 
 
