@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-18T12:15:30.575174+00:00
+Generated at: 2026-02-18T12:17:01.610638+00:00
 Project: calculator-cli-shay
 Milestone: 731
 """
@@ -311,14 +311,14 @@ TEST_CASES = json.loads(r'''[
     {
         "name": "test_unknown_option",
         "category": "INVALID_OPTIONS",
-        "description": "Using an unknown option flag should fail with argparse error",
+        "description": "Using an unknown option flag with no positional args should fail with argparse error for missing required arguments",
         "command": "$BASE_CLI_COMMAND",
         "args": [
             "--unknown-option"
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unrecognized arguments: --unknown-option",
+        "expected_stderr": "the following arguments are required: operation, a, b",
         "timeout_seconds": 10
     },
     {
