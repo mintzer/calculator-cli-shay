@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-18T11:42:42.446134+00:00
+Generated at: 2026-02-18T11:43:56.429639+00:00
 Project: calculator-cli-shay
 Milestone: 729
 """
@@ -588,7 +588,7 @@ TEST_CASES = json.loads(r'''[
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unrecognized arguments: --version",
+        "expected_stderr": "the following arguments are required: operation, a, b",
         "timeout_seconds": 10
     },
     {
