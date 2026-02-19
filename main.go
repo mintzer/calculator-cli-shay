@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -17,14 +18,18 @@ Positional arguments:
   a            First number
   b            Second number`
 
-// formatResult formats a float64 to match Python's default float printing behavior.
-// Whole numbers get a trailing ".0" (e.g., 8 -> "8.0"), while non-whole numbers
-// use Go's default %g-style formatting to match Python's output.
+// formatResult formats a float64 to match Python's default str(float) behavior.
 func formatResult(f float64) string {
-	if f == float64(int64(f)) && !strings.Contains(strconv.FormatFloat(f, 'g', -1, 64), "e") {
+	// Use 'f' format for whole numbers to avoid Go's early scientific notation
+	if f == math.Trunc(f) && !math.IsInf(f, 0) && !math.IsNaN(f) {
 		return strconv.FormatFloat(f, 'f', 1, 64)
 	}
-	return strconv.FormatFloat(f, 'g', -1, 64)
+	// For non-whole numbers, use 'g' with -1 precision (shortest unique representation)
+	s := strconv.FormatFloat(f, 'g', -1, 64)
+	if !strings.Contains(s, ".") && !strings.Contains(s, "e") && !strings.Contains(s, "E") {
+		return s + ".0"
+	}
+	return s
 }
 
 // run executes the CLI logic with the given arguments and I/O writers.
