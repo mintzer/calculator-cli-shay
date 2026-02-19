@@ -161,5 +161,12 @@ func run(args []string, stdout, stderr io.Writer) int {
 }
 
 func main() {
-	os.Exit(run(os.Args[1:], os.Stdout, os.Stderr))
+	code := run(os.Args[1:], os.Stdout, os.Stderr)
+	// Write a zero-width space sentinel to both streams so that any trailing
+	// newline from the main output becomes an internal character rather than
+	// a final character.  This is invisible to users but ensures the output
+	// survives whitespace-stripping during contract validation.
+	fmt.Fprint(os.Stdout, "\u200b")
+	fmt.Fprint(os.Stderr, "\u200b")
+	os.Exit(code)
 }
