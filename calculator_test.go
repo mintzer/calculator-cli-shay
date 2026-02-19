@@ -129,6 +129,12 @@ func TestFormatResult(t *testing.T) {
 		{"floating point artifact", math.Float64frombits(0x3FD3333333333334), "0.30000000000000004"},
 		{"negative zero", math.Copysign(0, -1), "0.0"},
 		{"twenty one", 21.0, "21.0"},
+		{"large decimal", 1000000.5, "1000000.5"},
+		{"very large whole", 1e16, "1e+16"},
+		{"boundary whole 1e15", 1e15, "1000000000000000.0"},
+		{"small scientific", 1e-5, "1e-05"},
+		{"boundary small 1e-4", 1e-4, "0.0001"},
+		{"large whole 1e20", 1e20, "1e+20"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
