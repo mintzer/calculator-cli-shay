@@ -23,12 +23,19 @@ options:
   -h, --help         show this help message and exit`
 
 // formatFloat formats a float64 to match Python's default float formatting.
-// Whole numbers get a trailing ".0", and fractional numbers use the shortest
-// representation that round-trips (equivalent to Python's str()/repr()).
+// Python's str() uses decimal notation for most values and scientific notation
+// only for very large/small exponents. We use 'f' format (decimal) by default,
+// falling back to 'g' only for special values like inf/NaN.
 func formatFloat(f float64) string {
+	// Handle special values (inf, NaN) using 'g' format.
 	s := strconv.FormatFloat(f, 'g', -1, 64)
-	// If the string already contains a dot or is special (inf/NaN), return as-is.
-	if strings.ContainsAny(s, ".eEnN") {
+	if strings.ContainsAny(s, "nNiI") {
+		return s
+	}
+	// Use 'f' format with shortest representation for decimal output.
+	s = strconv.FormatFloat(f, 'f', -1, 64)
+	// If result has a dot, it already matches Python format.
+	if strings.Contains(s, ".") {
 		return s
 	}
 	// Whole number: append ".0" to match Python's float output (e.g. "8.0").
