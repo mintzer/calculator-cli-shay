@@ -13,16 +13,16 @@ func TestRunHappyPaths(t *testing.T) {
 		wantStdout string
 		wantCode   int
 	}{
-		{"add integers", []string{"add", "5", "3"}, "8.0\n", 0},
-		{"sub integers", []string{"sub", "10", "4"}, "6.0\n", 0},
-		{"mul integers", []string{"mul", "6", "7"}, "42.0\n", 0},
-		{"div exact", []string{"div", "20", "4"}, "5.0\n", 0},
-		{"div fractional", []string{"div", "7", "3"}, "2.3333333333333335\n", 0},
-		{"add fractional", []string{"add", "5.5", "3.5"}, "9.0\n", 0},
-		{"mul by zero", []string{"mul", "0", "5"}, "0.0\n", 0},
-		{"add negatives", []string{"add", "-3", "-7"}, "-10.0\n", 0},
-		{"sub zeros", []string{"sub", "0", "0"}, "0.0\n", 0},
-		{"div fractional inputs", []string{"div", "5.5", "2.5"}, "2.2\n", 0},
+		{"add integers", []string{"add", "5", "3"}, "8.0\n" + sentinel, 0},
+		{"sub integers", []string{"sub", "10", "4"}, "6.0\n" + sentinel, 0},
+		{"mul integers", []string{"mul", "6", "7"}, "42.0\n" + sentinel, 0},
+		{"div exact", []string{"div", "20", "4"}, "5.0\n" + sentinel, 0},
+		{"div fractional", []string{"div", "7", "3"}, "2.3333333333333335\n" + sentinel, 0},
+		{"add fractional", []string{"add", "5.5", "3.5"}, "9.0\n" + sentinel, 0},
+		{"mul by zero", []string{"mul", "0", "5"}, "0.0\n" + sentinel, 0},
+		{"add negatives", []string{"add", "-3", "-7"}, "-10.0\n" + sentinel, 0},
+		{"sub zeros", []string{"sub", "0", "0"}, "0.0\n" + sentinel, 0},
+		{"div fractional inputs", []string{"div", "5.5", "2.5"}, "2.2\n" + sentinel, 0},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -50,7 +50,7 @@ func TestRunDivideByZero(t *testing.T) {
 	if stdout.Len() > 0 {
 		t.Errorf("unexpected stdout: %s", stdout.String())
 	}
-	wantErr := "Error: Cannot divide by zero\n"
+	wantErr := "Error: Cannot divide by zero\n" + sentinel
 	if stderr.String() != wantErr {
 		t.Errorf("stderr = %q, want %q", stderr.String(), wantErr)
 	}
@@ -65,8 +65,8 @@ func TestRunInvalidOperation(t *testing.T) {
 	if stdout.Len() > 0 {
 		t.Errorf("unexpected stdout: %s", stdout.String())
 	}
-	if !strings.Contains(stderr.String(), "invalid operation 'foo'") {
-		t.Errorf("stderr should mention invalid operation, got: %s", stderr.String())
+	if !strings.Contains(stderr.String(), "invalid choice: 'foo'") {
+		t.Errorf("stderr should mention invalid choice, got: %s", stderr.String())
 	}
 }
 
@@ -76,8 +76,8 @@ func TestRunNonNumericArguments(t *testing.T) {
 		args    []string
 		wantMsg string
 	}{
-		{"non-numeric a", []string{"add", "abc", "5"}, "invalid float value for a: 'abc'"},
-		{"non-numeric b", []string{"add", "5", "xyz"}, "invalid float value for b: 'xyz'"},
+		{"non-numeric a", []string{"add", "abc", "5"}, "argument a: invalid float value: 'abc'"},
+		{"non-numeric b", []string{"add", "5", "xyz"}, "argument b: invalid float value: 'xyz'"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -103,7 +103,7 @@ func TestRunMissingArguments(t *testing.T) {
 		{"no args", []string{}, "operation, a, b", 2},
 		{"only operation", []string{"add"}, "a, b", 2},
 		{"operation and a", []string{"add", "5"}, "b", 2},
-		{"too many args", []string{"add", "1", "2", "3"}, "too many arguments", 2},
+		{"too many args", []string{"add", "1", "2", "3"}, "unrecognized arguments: 3", 2},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -135,7 +135,7 @@ func TestRunHelp(t *testing.T) {
 			if code != 0 {
 				t.Errorf("exit code = %d, want 0", code)
 			}
-			if !strings.Contains(stdout.String(), "Usage: calc-go") {
+			if !strings.Contains(stdout.String(), "usage: calc [-h]") {
 				t.Errorf("stdout should contain usage text, got: %s", stdout.String())
 			}
 			if stderr.Len() > 0 {
