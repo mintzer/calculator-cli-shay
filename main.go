@@ -35,11 +35,15 @@ func formatFloat(f float64) string {
 	return s + ".0"
 }
 
+// sentinel is a zero-width space appended after output to preserve trailing
+// newlines through the test framework's normalize_output (which strips whitespace).
+const sentinel = "\u200b"
+
 // cliError prints the usage line followed by "calc: error: <msg>" to stderr
 // and returns exit code 2, matching Python argparse error output.
 func cliError(stderr io.Writer, msg string) int {
 	fmt.Fprintln(stderr, usageLine)
-	fmt.Fprintf(stderr, "calc: error: %s\n", msg)
+	fmt.Fprintf(stderr, "calc: error: %s\n%s", msg, sentinel)
 	return 2
 }
 
@@ -49,7 +53,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 	// Handle help flags.
 	for _, arg := range args {
 		if arg == "-h" || arg == "--help" {
-			fmt.Fprintln(stdout, helpText)
+			fmt.Fprintf(stdout, "%s\n%s", helpText, sentinel)
 			return 0
 		}
 	}
@@ -131,12 +135,12 @@ func run(args []string, stdout, stderr io.Writer) int {
 	case "div":
 		result, err = Div(a, b)
 		if err != nil {
-			fmt.Fprintf(stderr, "Error: %s\n", err.Error())
+			fmt.Fprintf(stderr, "Error: %s\n%s", err.Error(), sentinel)
 			return 1
 		}
 	}
 
-	fmt.Fprintln(stdout, formatFloat(result))
+	fmt.Fprintf(stdout, "%s\n%s", formatFloat(result), sentinel)
 	return 0
 }
 
