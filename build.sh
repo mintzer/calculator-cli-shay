@@ -1,5 +1,6 @@
 #!/bin/sh
 # Build script: selects the correct pre-compiled binary for the current platform
+# Supports darwin (arm64/amd64) and linux (amd64)
 ARCH=$(uname -m)
 OS=$(uname -s)
 
