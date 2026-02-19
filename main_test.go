@@ -65,8 +65,8 @@ func TestRunInvalidOperation(t *testing.T) {
 	if stdout.Len() > 0 {
 		t.Errorf("unexpected stdout: %s", stdout.String())
 	}
-	if !strings.Contains(stderr.String(), "invalid operation 'foo'") {
-		t.Errorf("stderr should mention invalid operation, got: %s", stderr.String())
+	if !strings.Contains(stderr.String(), "invalid choice: 'foo'") {
+		t.Errorf("stderr should mention invalid choice, got: %s", stderr.String())
 	}
 }
 
@@ -76,8 +76,8 @@ func TestRunNonNumericArguments(t *testing.T) {
 		args    []string
 		wantMsg string
 	}{
-		{"non-numeric a", []string{"add", "abc", "5"}, "invalid float value for a: 'abc'"},
-		{"non-numeric b", []string{"add", "5", "xyz"}, "invalid float value for b: 'xyz'"},
+		{"non-numeric a", []string{"add", "abc", "5"}, "argument a: invalid float value: 'abc'"},
+		{"non-numeric b", []string{"add", "5", "xyz"}, "argument b: invalid float value: 'xyz'"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -103,7 +103,7 @@ func TestRunMissingArguments(t *testing.T) {
 		{"no args", []string{}, "operation, a, b", 2},
 		{"only operation", []string{"add"}, "a, b", 2},
 		{"operation and a", []string{"add", "5"}, "b", 2},
-		{"too many args", []string{"add", "1", "2", "3"}, "too many arguments", 2},
+		{"too many args", []string{"add", "1", "2", "3"}, "unrecognized arguments: 3", 2},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -135,7 +135,7 @@ func TestRunHelp(t *testing.T) {
 			if code != 0 {
 				t.Errorf("exit code = %d, want 0", code)
 			}
-			if !strings.Contains(stdout.String(), "Usage: calc-go") {
+			if !strings.Contains(stdout.String(), "usage: calc [-h]") {
 				t.Errorf("stdout should contain usage text, got: %s", stdout.String())
 			}
 			if stderr.Len() > 0 {

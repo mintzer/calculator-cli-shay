@@ -8,15 +8,19 @@ import (
 	"strings"
 )
 
-const usageText = `Usage: calc-go <operation> <a> <b>
+const usageLine = "usage: calc [-h] {add,sub,mul,div} a b"
 
-A simple CLI calculator.
+const helpText = `usage: calc [-h] {add,sub,mul,div} a b
 
-Operations:
-  add    Add two numbers
-  sub    Subtract b from a
-  mul    Multiply two numbers
-  div    Divide a by b`
+Simple CLI Calculator
+
+positional arguments:
+  {add,sub,mul,div}  Operation to perform
+  a                  First number
+  b                  Second number
+
+options:
+  -h, --help         show this help message and exit`
 
 // formatFloat formats a float64 to match Python's default float formatting.
 // Whole numbers get a trailing ".0", and fractional numbers use the shortest
@@ -31,55 +35,88 @@ func formatFloat(f float64) string {
 	return s + ".0"
 }
 
+// cliError prints the usage line followed by "calc: error: <msg>" to stderr
+// and returns exit code 2, matching Python argparse error output.
+func cliError(stderr io.Writer, msg string) int {
+	fmt.Fprintln(stderr, usageLine)
+	fmt.Fprintf(stderr, "calc: error: %s\n", msg)
+	return 2
+}
+
 // run is the testable entry point for the CLI. It takes command-line arguments
 // (without the program name), stdout and stderr writers, and returns an exit code.
 func run(args []string, stdout, stderr io.Writer) int {
 	// Handle help flags.
 	for _, arg := range args {
 		if arg == "-h" || arg == "--help" {
-			fmt.Fprintln(stdout, usageText)
+			fmt.Fprintln(stdout, helpText)
 			return 0
 		}
 	}
 
-	// Validate argument count.
-	if len(args) != 3 {
-		fmt.Fprintln(stderr, usageText)
-		if len(args) == 0 {
-			fmt.Fprintln(stderr, "Error: the following arguments are required: operation, a, b")
-		} else if len(args) == 1 {
-			fmt.Fprintln(stderr, "Error: the following arguments are required: a, b")
-		} else if len(args) == 2 {
-			fmt.Fprintln(stderr, "Error: the following arguments are required: b")
-		} else {
-			fmt.Fprintln(stderr, "Error: too many arguments")
+	// Filter out unknown flags/options (anything starting with - that isn't a number),
+	// matching Python argparse behavior which ignores unknown options but treats
+	// negative numbers as positional arguments.
+	var positional []string
+	for _, arg := range args {
+		if strings.HasPrefix(arg, "-") && arg != "-" {
+			// Check if it's a negative number (starts with - followed by digit or dot)
+			rest := arg[1:]
+			if len(rest) > 0 && (rest[0] >= '0' && rest[0] <= '9' || rest[0] == '.') {
+				positional = append(positional, arg)
+				continue
+			}
+			// Unknown flag — ignore it (Python argparse skips these for positional parsing)
+			continue
 		}
-		return 2
+		positional = append(positional, arg)
 	}
 
-	operation := args[0]
-	aStr := args[1]
-	bStr := args[2]
+	validOps := map[string]bool{"add": true, "sub": true, "mul": true, "div": true}
+
+	// Validate we have enough positional arguments.
+	if len(positional) < 3 {
+		var missing []string
+		if len(positional) == 0 {
+			missing = append(missing, "operation", "a", "b")
+		} else if len(positional) == 1 {
+			// Check if the operation is valid first
+			if !validOps[positional[0]] {
+				return cliError(stderr, fmt.Sprintf("argument operation: invalid choice: '%s' (choose from add, sub, mul, div)", positional[0]))
+			}
+			missing = append(missing, "a", "b")
+		} else if len(positional) == 2 {
+			if !validOps[positional[0]] {
+				return cliError(stderr, fmt.Sprintf("argument operation: invalid choice: '%s' (choose from add, sub, mul, div)", positional[0]))
+			}
+			missing = append(missing, "b")
+		}
+		return cliError(stderr, fmt.Sprintf("the following arguments are required: %s", strings.Join(missing, ", ")))
+	}
+
+	// Check for extra arguments beyond the three expected.
+	if len(positional) > 3 {
+		return cliError(stderr, fmt.Sprintf("unrecognized arguments: %s", strings.Join(positional[3:], " ")))
+	}
+
+	operation := positional[0]
+	aStr := positional[1]
+	bStr := positional[2]
 
 	// Validate operation.
-	validOps := map[string]bool{"add": true, "sub": true, "mul": true, "div": true}
 	if !validOps[operation] {
-		fmt.Fprintln(stderr, usageText)
-		fmt.Fprintf(stderr, "Error: invalid operation '%s' (choose from add, sub, mul, div)\n", operation)
-		return 2
+		return cliError(stderr, fmt.Sprintf("argument operation: invalid choice: '%s' (choose from add, sub, mul, div)", operation))
 	}
 
 	// Parse numeric arguments.
 	a, err := strconv.ParseFloat(aStr, 64)
 	if err != nil {
-		fmt.Fprintf(stderr, "Error: invalid float value for a: '%s'\n", aStr)
-		return 2
+		return cliError(stderr, fmt.Sprintf("argument a: invalid float value: '%s'", aStr))
 	}
 
 	b, err := strconv.ParseFloat(bStr, 64)
 	if err != nil {
-		fmt.Fprintf(stderr, "Error: invalid float value for b: '%s'\n", bStr)
-		return 2
+		return cliError(stderr, fmt.Sprintf("argument b: invalid float value: '%s'", bStr))
 	}
 
 	// Dispatch operation.
