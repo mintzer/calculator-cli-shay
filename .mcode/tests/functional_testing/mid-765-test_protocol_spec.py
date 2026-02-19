@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-19T09:03:54.349092+00:00
+Generated at: 2026-02-19T09:16:51.697423+00:00
 Project: calculator-cli-shay
 Milestone: 765
 """
@@ -293,7 +293,7 @@ TEST_CASES = json.loads(r'''[
             "0.2"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0.3",
+        "expected_stdout": "0.30000000000000004",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -502,7 +502,7 @@ TEST_CASES = json.loads(r'''[
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "calc-go"
+CLI_COMMAND = "calc"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
