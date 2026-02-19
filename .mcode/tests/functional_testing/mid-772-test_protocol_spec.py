@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-19T13:10:08.600426+00:00
+Generated at: 2026-02-19T13:15:23.962378+00:00
 Project: calculator-cli-shay
 Milestone: 772
 """
@@ -37,7 +37,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_help_short_flag",
         "category": "HELP_OUTPUT",
         "description": "Verify -h shows usage information and exits with code 0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "-h"
         ],
@@ -50,7 +50,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_help_long_flag",
         "category": "HELP_OUTPUT",
         "description": "Verify --help shows usage information and exits with code 0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "--help"
         ],
@@ -63,7 +63,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_help_shows_operations",
         "category": "HELP_OUTPUT",
         "description": "Verify help output lists all available operations (add, sub, mul, div)",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "--help"
         ],
@@ -76,7 +76,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Add two positive integers: 5 + 3 = 8.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "5",
@@ -91,7 +91,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Subtract two positive integers: 10 - 4 = 6.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "sub",
             "10",
@@ -106,7 +106,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Multiply two positive integers: 6 * 7 = 42.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mul",
             "6",
@@ -121,7 +121,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Divide two positive integers evenly: 20 / 4 = 5.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "20",
@@ -136,7 +136,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Add two negative numbers: -5 + -3 = -8.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "-5",
@@ -151,7 +151,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_resulting_negative",
         "category": "HAPPY_PATH",
         "description": "Subtract resulting in negative: 3 - 10 = -7.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "sub",
             "3",
@@ -166,7 +166,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_zero",
         "category": "HAPPY_PATH",
         "description": "Multiply by zero: 5 * 0 = 0.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mul",
             "5",
@@ -181,7 +181,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_fractional_result",
         "category": "HAPPY_PATH",
         "description": "Divide with fractional result: 10 / 3 = 3.3333333333333335",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "10",
@@ -196,7 +196,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_float_operands",
         "category": "HAPPY_PATH",
         "description": "Add float operands: 1.5 + 2.3 = 3.8",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "1.5",
@@ -211,7 +211,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_zero_and_zero",
         "category": "HAPPY_PATH",
         "description": "Add zero to zero: 0 + 0 = 0.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "0",
@@ -226,7 +226,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_large_numbers",
         "category": "BOUNDARY",
         "description": "Multiply large numbers: 1000000 * 1000000 = 1000000000000.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mul",
             "1000000",
@@ -241,7 +241,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_small_result",
         "category": "BOUNDARY",
         "description": "Divide resulting in small number: 1 / 10000 = 0.0001",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "1",
@@ -256,7 +256,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_mixed_sign",
         "category": "HAPPY_PATH",
         "description": "Add positive and negative: 10 + -3 = 7.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "10",
@@ -271,7 +271,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_same_numbers",
         "category": "HAPPY_PATH",
         "description": "Subtract same numbers: 5 - 5 = 0.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "sub",
             "5",
@@ -286,7 +286,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_one_by_one",
         "category": "HAPPY_PATH",
         "description": "Divide 1 by 1: 1 / 1 = 1.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "1",
@@ -301,7 +301,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_by_zero",
         "category": "INVALID_ARGS",
         "description": "Divide by zero should print error to stderr and exit with code 1",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "5",
@@ -316,7 +316,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_zero_by_zero",
         "category": "INVALID_ARGS",
         "description": "Divide 0 by 0 should also trigger divide-by-zero error",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "0",
@@ -331,7 +331,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_invalid_operation",
         "category": "INVALID_ARGS",
         "description": "Invalid operation name should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "foo",
             "5",
@@ -346,7 +346,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_invalid_operation_mod",
         "category": "INVALID_ARGS",
         "description": "Unsupported operation 'mod' should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mod",
             "5",
@@ -361,7 +361,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_all_arguments",
         "category": "INVALID_ARGS",
         "description": "No arguments at all should fail with exit code 2 and show usage",
-        "command": "calc-go",
+        "command": "calc",
         "args": [],
         "expected_exit_code": 2,
         "expected_stdout": null,
@@ -372,7 +372,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_operand_b",
         "category": "INVALID_ARGS",
         "description": "Missing second operand should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "5"
@@ -386,7 +386,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_both_operands",
         "category": "INVALID_ARGS",
         "description": "Missing both operands should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add"
         ],
@@ -399,7 +399,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_extra_arguments",
         "category": "INVALID_ARGS",
         "description": "Extra arguments beyond operation, a, b should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "5",
@@ -415,7 +415,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_non_numeric_first_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric first operand should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "abc",
@@ -430,7 +430,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_non_numeric_second_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric second operand should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "5",
@@ -445,7 +445,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_non_numeric_both_operands",
         "category": "INVALID_ARGS",
         "description": "Non-numeric both operands should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "abc",
@@ -460,7 +460,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_empty_string_operand",
         "category": "BOUNDARY",
         "description": "Empty string as operand should fail with exit code 2",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "",
@@ -475,7 +475,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_unknown_flag",
         "category": "INVALID_OPTIONS",
         "description": "Unknown flag should fail with non-zero exit code",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "--verbose",
             "add",
@@ -484,14 +484,14 @@ TEST_CASES = json.loads(r'''[
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid",
+        "expected_stderr": "unrecognized arguments",
         "timeout_seconds": 10
     },
     {
         "name": "test_unknown_short_flag",
         "category": "INVALID_OPTIONS",
         "description": "Unknown short flag should fail with non-zero exit code",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "-v",
             "add",
@@ -500,14 +500,14 @@ TEST_CASES = json.loads(r'''[
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid",
+        "expected_stderr": "unrecognized arguments",
         "timeout_seconds": 10
     },
     {
         "name": "test_mul_negative_by_negative",
         "category": "HAPPY_PATH",
         "description": "Multiply two negative numbers: -4 * -5 = 20.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mul",
             "-4",
@@ -522,7 +522,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_negative_by_positive",
         "category": "HAPPY_PATH",
         "description": "Divide negative by positive: -10 / 2 = -5.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "-10",
@@ -537,7 +537,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_very_small_floats",
         "category": "BOUNDARY",
         "description": "Add very small float values: 0.0001 + 0.0002 = 0.00030000000000000003",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "0.0001",
@@ -552,7 +552,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_float_precision",
         "category": "BOUNDARY",
         "description": "Subtract with float precision: 0.3 - 0.1 (tests float handling)",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "sub",
             "0.3",
@@ -567,7 +567,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_operation_only_argument",
         "category": "INVALID_ARGS",
         "description": "Only operation with no numbers should fail",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mul"
         ],
@@ -580,7 +580,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_negative_by_zero",
         "category": "INVALID_ARGS",
         "description": "Divide negative number by zero should trigger divide-by-zero error",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "-5",
@@ -595,7 +595,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_integer_format_input",
         "category": "HAPPY_PATH",
         "description": "Integer inputs still produce float-formatted output: 1 + 1 = 2.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "add",
             "1",
@@ -610,7 +610,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_one",
         "category": "HAPPY_PATH",
         "description": "Multiply by one (identity): 42 * 1 = 42.0",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "mul",
             "42",
@@ -625,7 +625,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_result_with_decimal",
         "category": "HAPPY_PATH",
         "description": "Division with clean decimal result: 7 / 2 = 3.5",
-        "command": "calc-go",
+        "command": "calc",
         "args": [
             "div",
             "7",
@@ -639,7 +639,7 @@ TEST_CASES = json.loads(r'''[
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "calc-go"
+CLI_COMMAND = "calc"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
