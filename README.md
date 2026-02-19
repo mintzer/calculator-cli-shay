@@ -1,6 +1,45 @@
-# Destination Repository for calculator-cli-shay
+# calc-go
 
-This repository will contain translated/modified content.
+A simple CLI calculator — Go port of [calculator-cli-shay](https://github.com/mintzer/calculator-cli-shay).
 
-Source: https://github.com/mintzer/calculator-cli-shay.git
-Created: Thu Feb 19 07:39:47 UTC 2026
+## Build
+
+```sh
+go build -o calc-go .
+```
+
+## Usage
+
+```sh
+calc-go <operation> <a> <b>
+```
+
+### Operations
+
+| Operation | Description          |
+|-----------|----------------------|
+| `add`     | Add two numbers      |
+| `sub`     | Subtract b from a    |
+| `mul`     | Multiply two numbers |
+| `div`     | Divide a by b        |
+
+### Examples
+
+```sh
+./calc-go add 5 3      # 8.0
+./calc-go sub 10 4     # 6.0
+./calc-go mul 3 7      # 21.0
+./calc-go div 10 3     # 3.3333333333333335
+```
+
+### Help
+
+```sh
+./calc-go --help
+```
+
+## Testing
+
+```sh
+go test ./...
+```
