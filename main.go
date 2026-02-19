@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-const usageText = `usage: calc-go [-h] {add,sub,mul,div} a b
+const usageText = `usage: calc [-h] {add,sub,mul,div} a b
 
 Simple CLI Calculator
 
@@ -52,7 +52,7 @@ func formatResult(f float64) string {
 // run is the testable core of the CLI. It processes the given args (without the
 // program name), writes output to stdout/stderr, and returns an exit code.
 func run(args []string, stdout, stderr io.Writer) int {
-	// Handle help flags
+	// Handle help flags anywhere in args
 	for _, arg := range args {
 		if arg == "-h" || arg == "--help" {
 			fmt.Fprintln(stdout, usageText)
@@ -60,29 +60,54 @@ func run(args []string, stdout, stderr io.Writer) int {
 		}
 	}
 
+	// Detect unknown flags (anything starting with - that isn't -h/--help)
+	// Python's argparse identifies these before positional arg parsing
+	var unknownFlags []string
+	var positionalArgs []string
+	for _, arg := range args {
+		if strings.HasPrefix(arg, "-") && arg != "-h" && arg != "--help" {
+			// Check if it looks like a negative number (digits/dots after -)
+			// by attempting to parse as float
+			if _, err := strconv.ParseFloat(arg, 64); err != nil {
+				unknownFlags = append(unknownFlags, arg)
+			} else {
+				positionalArgs = append(positionalArgs, arg)
+			}
+		} else {
+			positionalArgs = append(positionalArgs, arg)
+		}
+	}
+
+	// If there are unknown flags, report them
+	if len(unknownFlags) > 0 {
+		fmt.Fprintln(stderr, "usage: calc [-h] {add,sub,mul,div} a b")
+		fmt.Fprintf(stderr, "calc: error: unrecognized arguments: %s\n", strings.Join(unknownFlags, " "))
+		return 2
+	}
+
 	// Validate argument count
-	if len(args) < 3 {
-		fmt.Fprintln(stderr, "usage: calc-go [-h] {add,sub,mul,div} a b")
+	if len(positionalArgs) < 3 {
+		fmt.Fprintln(stderr, "usage: calc [-h] {add,sub,mul,div} a b")
 		switch {
-		case len(args) == 0:
-			fmt.Fprintln(stderr, "calc-go: error: the following arguments are required: operation, a, b")
-		case len(args) == 1:
-			fmt.Fprintln(stderr, "calc-go: error: the following arguments are required: a, b")
-		case len(args) == 2:
-			fmt.Fprintln(stderr, "calc-go: error: the following arguments are required: b")
+		case len(positionalArgs) == 0:
+			fmt.Fprintln(stderr, "calc: error: the following arguments are required: operation, a, b")
+		case len(positionalArgs) == 1:
+			fmt.Fprintln(stderr, "calc: error: the following arguments are required: a, b")
+		case len(positionalArgs) == 2:
+			fmt.Fprintln(stderr, "calc: error: the following arguments are required: b")
 		}
 		return 2
 	}
 
-	if len(args) > 3 {
-		fmt.Fprintln(stderr, "usage: calc-go [-h] {add,sub,mul,div} a b")
-		fmt.Fprintf(stderr, "calc-go: error: unrecognized arguments: %s\n", strings.Join(args[3:], " "))
+	if len(positionalArgs) > 3 {
+		fmt.Fprintln(stderr, "usage: calc [-h] {add,sub,mul,div} a b")
+		fmt.Fprintf(stderr, "calc: error: unrecognized arguments: %s\n", strings.Join(positionalArgs[3:], " "))
 		return 2
 	}
 
-	operation := args[0]
-	aStr := args[1]
-	bStr := args[2]
+	operation := positionalArgs[0]
+	aStr := positionalArgs[1]
+	bStr := positionalArgs[2]
 
 	// Validate operation
 	validOps := []string{"add", "sub", "mul", "div"}
@@ -94,23 +119,23 @@ func run(args []string, stdout, stderr io.Writer) int {
 		}
 	}
 	if !isValid {
-		fmt.Fprintln(stderr, "usage: calc-go [-h] {add,sub,mul,div} a b")
-		fmt.Fprintf(stderr, "calc-go: error: argument operation: invalid choice: '%s' (choose from 'add', 'sub', 'mul', 'div')\n", operation)
+		fmt.Fprintln(stderr, "usage: calc [-h] {add,sub,mul,div} a b")
+		fmt.Fprintf(stderr, "calc: error: argument operation: invalid choice: '%s' (choose from add, sub, mul, div)\n", operation)
 		return 2
 	}
 
 	// Parse numeric arguments
 	a, err := strconv.ParseFloat(aStr, 64)
 	if err != nil {
-		fmt.Fprintln(stderr, "usage: calc-go [-h] {add,sub,mul,div} a b")
-		fmt.Fprintf(stderr, "calc-go: error: argument a: invalid float value: '%s'\n", aStr)
+		fmt.Fprintln(stderr, "usage: calc [-h] {add,sub,mul,div} a b")
+		fmt.Fprintf(stderr, "calc: error: argument a: invalid float value: '%s'\n", aStr)
 		return 2
 	}
 
 	b, err := strconv.ParseFloat(bStr, 64)
 	if err != nil {
-		fmt.Fprintln(stderr, "usage: calc-go [-h] {add,sub,mul,div} a b")
-		fmt.Fprintf(stderr, "calc-go: error: argument b: invalid float value: '%s'\n", bStr)
+		fmt.Fprintln(stderr, "usage: calc [-h] {add,sub,mul,div} a b")
+		fmt.Fprintf(stderr, "calc: error: argument b: invalid float value: '%s'\n", bStr)
 		return 2
 	}
 

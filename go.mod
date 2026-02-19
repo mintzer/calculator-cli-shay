@@ -1,3 +1,3 @@
 module github.com/mintzer/calculator-cli-shay
 
-go 1.25.0
+go 1.22.0

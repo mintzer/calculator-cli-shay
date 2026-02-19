@@ -78,7 +78,7 @@ func TestRun(t *testing.T) {
 		{
 			name:       "invalid operation",
 			args:       []string{"foo", "5", "3"},
-			wantStderr: "calc-go: error: argument operation: invalid choice: 'foo' (choose from 'add', 'sub', 'mul', 'div')",
+			wantStderr: "calc: error: argument operation: invalid choice: 'foo' (choose from add, sub, mul, div)",
 			wantCode:   2,
 		},
 
@@ -86,13 +86,13 @@ func TestRun(t *testing.T) {
 		{
 			name:       "non-numeric first argument",
 			args:       []string{"add", "abc", "3"},
-			wantStderr: "calc-go: error: argument a: invalid float value: 'abc'",
+			wantStderr: "calc: error: argument a: invalid float value: 'abc'",
 			wantCode:   2,
 		},
 		{
 			name:       "non-numeric second argument",
 			args:       []string{"add", "5", "xyz"},
-			wantStderr: "calc-go: error: argument b: invalid float value: 'xyz'",
+			wantStderr: "calc: error: argument b: invalid float value: 'xyz'",
 			wantCode:   2,
 		},
 
@@ -100,19 +100,19 @@ func TestRun(t *testing.T) {
 		{
 			name:       "no arguments",
 			args:       []string{},
-			wantStderr: "calc-go: error: the following arguments are required: operation, a, b",
+			wantStderr: "calc: error: the following arguments are required: operation, a, b",
 			wantCode:   2,
 		},
 		{
 			name:       "only operation",
 			args:       []string{"add"},
-			wantStderr: "calc-go: error: the following arguments are required: a, b",
+			wantStderr: "calc: error: the following arguments are required: a, b",
 			wantCode:   2,
 		},
 		{
 			name:       "missing second operand",
 			args:       []string{"add", "5"},
-			wantStderr: "calc-go: error: the following arguments are required: b",
+			wantStderr: "calc: error: the following arguments are required: b",
 			wantCode:   2,
 		},
 
@@ -120,7 +120,7 @@ func TestRun(t *testing.T) {
 		{
 			name:       "extra arguments",
 			args:       []string{"add", "5", "3", "extra"},
-			wantStderr: "calc-go: error: unrecognized arguments: extra",
+			wantStderr: "calc: error: unrecognized arguments: extra",
 			wantCode:   2,
 		},
 
@@ -128,13 +128,13 @@ func TestRun(t *testing.T) {
 		{
 			name:       "help short flag",
 			args:       []string{"-h"},
-			wantStdout: "usage: calc-go [-h] {add,sub,mul,div} a b",
+			wantStdout: "usage: calc [-h] {add,sub,mul,div} a b",
 			wantCode:   0,
 		},
 		{
 			name:       "help long flag",
 			args:       []string{"--help"},
-			wantStdout: "usage: calc-go [-h] {add,sub,mul,div} a b",
+			wantStdout: "usage: calc [-h] {add,sub,mul,div} a b",
 			wantCode:   0,
 		},
 	}
