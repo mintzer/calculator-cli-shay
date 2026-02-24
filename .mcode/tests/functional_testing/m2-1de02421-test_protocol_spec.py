@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-24T18:02:57.330336+00:00
+Generated at: 2026-02-24T18:07:38.662934+00:00
 Project: calculator-cli-shay
 Milestone: 2
 """
@@ -37,8 +37,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Addition of two positive integers produces correct result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "5",
             "3"
@@ -52,8 +53,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Subtraction of two positive integers produces correct result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "sub",
             "10",
             "4"
@@ -67,8 +69,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Multiplication of two positive integers produces correct result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "mul",
             "6",
             "7"
@@ -82,8 +85,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Division of two positive integers produces correct result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "div",
             "20",
             "4"
@@ -97,8 +101,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Addition with negative numbers works correctly",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "-5",
             "3"
@@ -112,8 +117,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Subtraction of two negative numbers works correctly",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "sub",
             "-10",
             "-4"
@@ -127,8 +133,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Multiplication with a negative number produces correct negative result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "mul",
             "-6",
             "7"
@@ -142,8 +149,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Division with a negative dividend produces correct negative result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "div",
             "-20",
             "4"
@@ -157,8 +165,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_floating_point",
         "category": "HAPPY_PATH",
         "description": "Addition of floating-point numbers produces correct result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "1.5",
             "2.5"
@@ -172,8 +181,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_non_integer_result",
         "category": "HAPPY_PATH",
         "description": "Division producing a floating-point result displays correctly",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "div",
             "7",
             "2"
@@ -187,8 +197,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_zeros",
         "category": "BOUNDARY",
         "description": "Addition with zeros produces correct result",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "0",
             "0"
@@ -202,8 +213,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_zero",
         "category": "BOUNDARY",
         "description": "Multiplication by zero produces zero",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "mul",
             "100",
             "0"
@@ -217,8 +229,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_equal_numbers",
         "category": "BOUNDARY",
         "description": "Subtraction of equal numbers produces zero",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "sub",
             "42",
             "42"
@@ -232,8 +245,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_one",
         "category": "BOUNDARY",
         "description": "Division by one returns the dividend unchanged",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "div",
             "99",
             "1"
@@ -247,8 +261,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_large_numbers",
         "category": "BOUNDARY",
         "description": "Operations with large numbers work correctly",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "1000000",
             "2000000"
@@ -262,8 +277,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_very_small_float",
         "category": "BOUNDARY",
         "description": "Operations with very small floating-point numbers work correctly",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "mul",
             "0.001",
             "0.001"
@@ -277,8 +293,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division by zero produces an error message and non-zero exit code",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "div",
             "1",
             "0"
@@ -292,8 +309,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_zero_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division of zero by zero also produces division-by-zero error",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "div",
             "0",
             "0"
@@ -307,8 +325,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_unknown_operation",
         "category": "INVALID_ARGS",
         "description": "Unknown operation name produces error with operation name",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "foo",
             "1",
             "2"
@@ -322,8 +341,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_unknown_operation_mod",
         "category": "INVALID_ARGS",
         "description": "Unsupported operation 'mod' is rejected",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "mod",
             "10",
             "3"
@@ -337,8 +357,10 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_all_args",
         "category": "INVALID_ARGS",
         "description": "No arguments at all produces usage text and non-zero exit",
-        "command": "calc",
-        "args": [],
+        "command": "python3",
+        "args": [
+            "calculator.py"
+        ],
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "usage:",
@@ -348,8 +370,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_operands",
         "category": "INVALID_ARGS",
         "description": "Operation with missing operands produces usage text and non-zero exit",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add"
         ],
         "expected_exit_code": 2,
@@ -361,8 +384,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_second_operand",
         "category": "INVALID_ARGS",
         "description": "Operation with only one operand produces usage text and non-zero exit",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "1"
         ],
@@ -375,8 +399,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_too_many_args",
         "category": "INVALID_ARGS",
         "description": "Extra arguments beyond the expected three produce usage text and non-zero exit",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "1",
             "2",
@@ -391,8 +416,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_non_numeric_first_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric first operand produces an error",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "abc",
             "2"
@@ -406,8 +432,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_non_numeric_second_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric second operand produces an error",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "1",
             "xyz"
@@ -421,8 +448,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_both_operands_non_numeric",
         "category": "INVALID_ARGS",
         "description": "Both operands non-numeric produces an error for the first",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "mul",
             "foo",
             "bar"
@@ -436,8 +464,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_empty_string_operand",
         "category": "BOUNDARY",
         "description": "Empty string as operand is treated as invalid",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "add",
             "",
             "5"
@@ -451,8 +480,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_unknown_operation_shows_usage",
         "category": "INVALID_ARGS",
         "description": "Unknown operation error message also includes available choices",
-        "command": "calc",
+        "command": "python3",
         "args": [
+            "calculator.py",
             "pow",
             "2",
             "8"
@@ -465,7 +495,7 @@ TEST_CASES = json.loads(r'''[
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "calc"
+CLI_COMMAND = "python3"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
