@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-24T17:47:50.124434+00:00
+Generated at: 2026-02-24T17:55:11.069385+00:00
 Project: calculator-cli-shay
 Milestone: 2
 """
@@ -37,7 +37,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Addition of two positive integers produces correct result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "5",
@@ -52,7 +52,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Subtraction of two positive integers produces correct result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "10",
@@ -67,7 +67,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Multiplication of two positive integers produces correct result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "6",
@@ -82,7 +82,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Division of two positive integers produces correct result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "20",
@@ -97,7 +97,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Addition with negative numbers works correctly",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "-5",
@@ -112,7 +112,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Subtraction of two negative numbers works correctly",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "-10",
@@ -127,7 +127,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Multiplication with a negative number produces correct negative result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "-6",
@@ -142,7 +142,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Division with a negative dividend produces correct negative result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "-20",
@@ -157,7 +157,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_floating_point",
         "category": "HAPPY_PATH",
         "description": "Addition of floating-point numbers produces correct result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1.5",
@@ -172,7 +172,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_non_integer_result",
         "category": "HAPPY_PATH",
         "description": "Division producing a floating-point result displays correctly",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "7",
@@ -187,7 +187,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_zeros",
         "category": "BOUNDARY",
         "description": "Addition with zeros produces correct result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "0",
@@ -202,7 +202,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_zero",
         "category": "BOUNDARY",
         "description": "Multiplication by zero produces zero",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "100",
@@ -217,7 +217,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_equal_numbers",
         "category": "BOUNDARY",
         "description": "Subtraction of equal numbers produces zero",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "42",
@@ -232,7 +232,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_one",
         "category": "BOUNDARY",
         "description": "Division by one returns the dividend unchanged",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "99",
@@ -247,14 +247,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_large_numbers",
         "category": "BOUNDARY",
         "description": "Operations with large numbers work correctly",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1000000",
             "2000000"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "3e+06",
+        "expected_stdout": "3000000",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -262,7 +262,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_very_small_float",
         "category": "BOUNDARY",
         "description": "Operations with very small floating-point numbers work correctly",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "0.001",
@@ -277,7 +277,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division by zero produces an error message and non-zero exit code",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "1",
@@ -292,7 +292,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_zero_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division of zero by zero also produces division-by-zero error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "0",
@@ -306,166 +306,166 @@ TEST_CASES = json.loads(r'''[
     {
         "name": "test_unknown_operation",
         "category": "INVALID_ARGS",
-        "description": "Unknown operation name produces error with operation name and usage text",
-        "command": "calculator",
+        "description": "Unknown operation name produces error with operation name",
+        "command": "calc",
         "args": [
             "foo",
             "1",
             "2"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation_mod",
         "category": "INVALID_ARGS",
-        "description": "Unsupported operation 'mod' is rejected as unknown",
-        "command": "calculator",
+        "description": "Unsupported operation 'mod' is rejected",
+        "command": "calc",
         "args": [
             "mod",
             "10",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     },
     {
         "name": "test_missing_all_args",
         "category": "INVALID_ARGS",
         "description": "No arguments at all produces usage text and non-zero exit",
-        "command": "calculator",
+        "command": "calc",
         "args": [],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "usage:",
         "timeout_seconds": 10
     },
     {
         "name": "test_missing_operands",
         "category": "INVALID_ARGS",
         "description": "Operation with missing operands produces usage text and non-zero exit",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "usage:",
         "timeout_seconds": 10
     },
     {
         "name": "test_missing_second_operand",
         "category": "INVALID_ARGS",
         "description": "Operation with only one operand produces usage text and non-zero exit",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "usage:",
         "timeout_seconds": 10
     },
     {
         "name": "test_too_many_args",
         "category": "INVALID_ARGS",
         "description": "Extra arguments beyond the expected three produce usage text and non-zero exit",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1",
             "2",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "usage:",
         "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_first_operand",
         "category": "INVALID_ARGS",
-        "description": "Non-numeric first operand produces an 'invalid number' error",
-        "command": "calculator",
+        "description": "Non-numeric first operand produces an error",
+        "command": "calc",
         "args": [
             "add",
             "abc",
             "2"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_second_operand",
         "category": "INVALID_ARGS",
-        "description": "Non-numeric second operand produces an 'invalid number' error",
-        "command": "calculator",
+        "description": "Non-numeric second operand produces an error",
+        "command": "calc",
         "args": [
             "add",
             "1",
             "xyz"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_both_operands_non_numeric",
         "category": "INVALID_ARGS",
-        "description": "Both operands non-numeric produces an 'invalid number' error for the first",
-        "command": "calculator",
+        "description": "Both operands non-numeric produces an error for the first",
+        "command": "calc",
         "args": [
             "mul",
             "foo",
             "bar"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_empty_string_operand",
         "category": "BOUNDARY",
-        "description": "Empty string as operand is treated as invalid number",
-        "command": "calculator",
+        "description": "Empty string as operand is treated as invalid",
+        "command": "calc",
         "args": [
             "add",
             "",
             "5"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation_shows_usage",
         "category": "INVALID_ARGS",
-        "description": "Unknown operation error message also includes usage information",
-        "command": "calculator",
+        "description": "Unknown operation error message also includes available choices",
+        "command": "calc",
         "args": [
             "pow",
             "2",
             "8"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Operations:",
+        "expected_stderr": "choose from",
         "timeout_seconds": 10
     }
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "calculator"
+CLI_COMMAND = "calc"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
