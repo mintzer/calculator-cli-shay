@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-24T17:49:58.892830+00:00
+Generated at: 2026-02-24T18:10:43.540132+00:00
 Project: calculator-cli-shay
 Milestone: 1
 """
@@ -37,14 +37,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Add two positive integers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "5",
             "3"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "8",
+        "expected_stdout": "8.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -52,14 +52,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Subtract two positive integers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "10",
             "4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "6",
+        "expected_stdout": "6.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -67,14 +67,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Multiply two positive integers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "6",
             "7"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "42",
+        "expected_stdout": "42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -82,14 +82,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Divide two positive integers evenly",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "20",
             "4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "5",
+        "expected_stdout": "5.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -97,7 +97,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_fractional_result",
         "category": "HAPPY_PATH",
         "description": "Division producing a fractional result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "10",
@@ -112,14 +112,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_negative_and_positive",
         "category": "HAPPY_PATH",
         "description": "Add a negative number and a positive number",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "-5",
             "3"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-2",
+        "expected_stdout": "-2.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -127,14 +127,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_two_negatives",
         "category": "HAPPY_PATH",
         "description": "Subtract two negative numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "-10",
             "-4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-6",
+        "expected_stdout": "-6.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -142,14 +142,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_negative_and_positive",
         "category": "HAPPY_PATH",
         "description": "Multiply a negative number by a positive number",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "-6",
             "7"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-42",
+        "expected_stdout": "-42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -157,14 +157,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_negative_dividend",
         "category": "HAPPY_PATH",
         "description": "Divide a negative number by a positive number",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "-20",
             "4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-5",
+        "expected_stdout": "-5.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -172,14 +172,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_floating_point",
         "category": "HAPPY_PATH",
         "description": "Add two floating-point numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1.5",
             "2.5"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "4",
+        "expected_stdout": "4.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -187,7 +187,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_floating_point",
         "category": "HAPPY_PATH",
         "description": "Subtract two floating-point numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "5.5",
@@ -202,14 +202,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_floating_point",
         "category": "HAPPY_PATH",
         "description": "Multiply two floating-point numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "2.5",
             "4.0"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "10",
+        "expected_stdout": "10.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -217,14 +217,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_floating_point",
         "category": "HAPPY_PATH",
         "description": "Divide two floating-point numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "7.5",
             "2.5"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "3",
+        "expected_stdout": "3.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -232,14 +232,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_zeros",
         "category": "HAPPY_PATH",
         "description": "Add two zeros",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "0",
             "0"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0",
+        "expected_stdout": "0.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -247,14 +247,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_zero_identity",
         "category": "HAPPY_PATH",
         "description": "Adding zero to a number returns the number",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "42",
             "0"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "42",
+        "expected_stdout": "42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -262,14 +262,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_zero",
         "category": "HAPPY_PATH",
         "description": "Multiplying by zero returns zero",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "42",
             "0"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0",
+        "expected_stdout": "0.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -277,14 +277,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_one",
         "category": "HAPPY_PATH",
         "description": "Multiplying by one returns the number",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "42",
             "1"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "42",
+        "expected_stdout": "42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -292,14 +292,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_by_one",
         "category": "HAPPY_PATH",
         "description": "Dividing by one returns the number",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "42",
             "1"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "42",
+        "expected_stdout": "42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -307,7 +307,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division by zero produces an error on stderr and exits non-zero",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "1",
@@ -315,14 +315,14 @@ TEST_CASES = json.loads(r'''[
         ],
         "expected_exit_code": 1,
         "expected_stdout": null,
-        "expected_stderr": "divide by zero",
+        "expected_stderr": "Cannot divide by zero",
         "timeout_seconds": 10
     },
     {
         "name": "test_div_zero_by_zero",
         "category": "INVALID_ARGS",
         "description": "Dividing zero by zero produces a division-by-zero error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "0",
@@ -330,14 +330,14 @@ TEST_CASES = json.loads(r'''[
         ],
         "expected_exit_code": 1,
         "expected_stdout": null,
-        "expected_stderr": "divide by zero",
+        "expected_stderr": "Cannot divide by zero",
         "timeout_seconds": 10
     },
     {
         "name": "test_div_negative_by_zero",
         "category": "INVALID_ARGS",
         "description": "Dividing a negative number by zero produces a division-by-zero error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "-5",
@@ -345,158 +345,158 @@ TEST_CASES = json.loads(r'''[
         ],
         "expected_exit_code": 1,
         "expected_stdout": null,
-        "expected_stderr": "divide by zero",
+        "expected_stderr": "Cannot divide by zero",
         "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation",
         "category": "INVALID_ARGS",
         "description": "Unknown operation name produces an error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "foo",
             "1",
             "2"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation_mod",
         "category": "INVALID_ARGS",
         "description": "Unsupported 'mod' operation produces an error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mod",
             "10",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     },
     {
         "name": "test_no_arguments",
         "category": "INVALID_ARGS",
         "description": "No arguments produces usage error on stderr",
-        "command": "calculator",
+        "command": "calc",
         "args": [],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "the following arguments are required",
         "timeout_seconds": 10
     },
     {
         "name": "test_only_operation",
         "category": "INVALID_ARGS",
         "description": "Only operation without operands produces usage error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "the following arguments are required",
         "timeout_seconds": 10
     },
     {
         "name": "test_missing_second_operand",
         "category": "INVALID_ARGS",
         "description": "Missing second operand produces usage error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "the following arguments are required",
         "timeout_seconds": 10
     },
     {
         "name": "test_extra_arguments",
         "category": "INVALID_ARGS",
         "description": "Extra arguments beyond the expected three produces usage error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1",
             "2",
             "3"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "Usage:",
+        "expected_stderr": "unrecognized arguments",
         "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_first_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric first operand produces an error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "abc",
             "2"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_second_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric second operand produces an error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "2",
             "xyz"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_both_operands_non_numeric",
         "category": "INVALID_ARGS",
         "description": "Both operands non-numeric produces an error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "foo",
             "bar"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_empty_string_operand",
         "category": "INVALID_ARGS",
         "description": "Empty string as operand produces an error",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "",
             "5"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "invalid number",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
         "name": "test_large_numbers_add",
         "category": "BOUNDARY",
         "description": "Addition with very large numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1e18",
@@ -511,7 +511,7 @@ TEST_CASES = json.loads(r'''[
         "name": "test_very_small_numbers_add",
         "category": "BOUNDARY",
         "description": "Addition with very small floating-point numbers",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "1e-15",
@@ -526,14 +526,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_same_numbers",
         "category": "BOUNDARY",
         "description": "Subtracting a number from itself returns zero",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "sub",
             "42",
             "42"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0",
+        "expected_stdout": "0.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -541,14 +541,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_number_by_itself",
         "category": "BOUNDARY",
         "description": "Dividing a number by itself returns 1",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "7",
             "7"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "1",
+        "expected_stdout": "1.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -556,14 +556,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_negative_zero_operand",
         "category": "BOUNDARY",
         "description": "Negative zero as operand is accepted",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "add",
             "-0",
             "5"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "5",
+        "expected_stdout": "5.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -571,14 +571,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_scientific_notation_input",
         "category": "BOUNDARY",
         "description": "Scientific notation input is accepted",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "1.5e2",
             "2"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "300",
+        "expected_stdout": "300.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -586,14 +586,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_two_negatives",
         "category": "HAPPY_PATH",
         "description": "Multiplying two negative numbers gives a positive result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "mul",
             "-3",
             "-4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "12",
+        "expected_stdout": "12.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -601,14 +601,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_two_negatives",
         "category": "HAPPY_PATH",
         "description": "Dividing two negative numbers gives a positive result",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "div",
             "-20",
             "-4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "5",
+        "expected_stdout": "5.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -616,21 +616,21 @@ TEST_CASES = json.loads(r'''[
         "name": "test_operation_case_sensitive",
         "category": "INVALID_ARGS",
         "description": "Operation names are case-sensitive; uppercase is rejected",
-        "command": "calculator",
+        "command": "calc",
         "args": [
             "ADD",
             "1",
             "2"
         ],
-        "expected_exit_code": 1,
+        "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "unknown operation",
+        "expected_stderr": "invalid choice",
         "timeout_seconds": 10
     }
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "calculator"
+CLI_COMMAND = "calc"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
