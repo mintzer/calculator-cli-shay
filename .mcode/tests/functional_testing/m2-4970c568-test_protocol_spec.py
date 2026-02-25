@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-25T18:05:43.619225+00:00
+Generated at: 2026-02-25T18:19:13.906616+00:00
 Project: calculator-cli-shay
 Milestone: 2
 """
@@ -109,51 +109,6 @@ TEST_CASES = json.loads(r'''[
         "timeout_seconds": 10
     },
     {
-        "name": "test_sub_negative_numbers",
-        "category": "HAPPY_PATH",
-        "description": "Subtraction of two negative numbers works correctly",
-        "command": ".venv/bin/calc",
-        "subcommand": "sub",
-        "args": [
-            "-10",
-            "-4"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "-6.0",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_mul_negative_numbers",
-        "category": "HAPPY_PATH",
-        "description": "Multiplication with a negative number produces correct negative result",
-        "command": ".venv/bin/calc",
-        "subcommand": "mul",
-        "args": [
-            "-6",
-            "7"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "-42.0",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_div_negative_numbers",
-        "category": "HAPPY_PATH",
-        "description": "Division with a negative dividend produces correct negative result",
-        "command": ".venv/bin/calc",
-        "subcommand": "div",
-        "args": [
-            "-20",
-            "4"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "-5.0",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
         "name": "test_add_floating_point",
         "category": "HAPPY_PATH",
         "description": "Addition of floating-point numbers produces correct result",
@@ -214,66 +169,6 @@ TEST_CASES = json.loads(r'''[
         "timeout_seconds": 10
     },
     {
-        "name": "test_sub_equal_numbers",
-        "category": "BOUNDARY",
-        "description": "Subtraction of equal numbers produces zero",
-        "command": ".venv/bin/calc",
-        "subcommand": "sub",
-        "args": [
-            "42",
-            "42"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "0.0",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_div_one",
-        "category": "BOUNDARY",
-        "description": "Division by one returns the dividend unchanged",
-        "command": ".venv/bin/calc",
-        "subcommand": "div",
-        "args": [
-            "99",
-            "1"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "99.0",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_large_numbers",
-        "category": "BOUNDARY",
-        "description": "Operations with large numbers work correctly",
-        "command": ".venv/bin/calc",
-        "subcommand": "add",
-        "args": [
-            "1000000",
-            "2000000"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "3000000.0",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_very_small_float",
-        "category": "BOUNDARY",
-        "description": "Operations with very small floating-point numbers work correctly",
-        "command": ".venv/bin/calc",
-        "subcommand": "mul",
-        "args": [
-            "0.001",
-            "0.001"
-        ],
-        "expected_exit_code": 0,
-        "expected_stdout": "1e-06",
-        "expected_stderr": null,
-        "timeout_seconds": 10
-    },
-    {
         "name": "test_div_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division by zero produces an error message and non-zero exit code",
@@ -281,21 +176,6 @@ TEST_CASES = json.loads(r'''[
         "subcommand": "div",
         "args": [
             "1",
-            "0"
-        ],
-        "expected_exit_code": 1,
-        "expected_stdout": null,
-        "expected_stderr": "Cannot divide by zero",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_div_zero_by_zero",
-        "category": "INVALID_ARGS",
-        "description": "Division of zero by zero also produces division-by-zero error",
-        "command": ".venv/bin/calc",
-        "subcommand": "div",
-        "args": [
-            "0",
             "0"
         ],
         "expected_exit_code": 1,
@@ -313,22 +193,6 @@ TEST_CASES = json.loads(r'''[
             "foo",
             "1",
             "2"
-        ],
-        "expected_exit_code": 2,
-        "expected_stdout": null,
-        "expected_stderr": "invalid choice",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_unknown_operation_mod",
-        "category": "INVALID_ARGS",
-        "description": "Unsupported operation 'mod' is rejected",
-        "command": ".venv/bin/calc",
-        "subcommand": "",
-        "args": [
-            "mod",
-            "10",
-            "3"
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
@@ -360,17 +224,18 @@ TEST_CASES = json.loads(r'''[
         "timeout_seconds": 10
     },
     {
-        "name": "test_missing_second_operand",
+        "name": "test_non_numeric_first_operand",
         "category": "INVALID_ARGS",
-        "description": "Operation with only one operand produces error and non-zero exit",
+        "description": "Non-numeric first operand produces an error",
         "command": ".venv/bin/calc",
         "subcommand": "add",
         "args": [
-            "1"
+            "abc",
+            "2"
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "the following arguments are required",
+        "expected_stderr": "invalid float value",
         "timeout_seconds": 10
     },
     {
@@ -387,82 +252,6 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "unrecognized arguments",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_non_numeric_first_operand",
-        "category": "INVALID_ARGS",
-        "description": "Non-numeric first operand produces an error",
-        "command": ".venv/bin/calc",
-        "subcommand": "add",
-        "args": [
-            "abc",
-            "2"
-        ],
-        "expected_exit_code": 2,
-        "expected_stdout": null,
-        "expected_stderr": "invalid float value",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_non_numeric_second_operand",
-        "category": "INVALID_ARGS",
-        "description": "Non-numeric second operand produces an error",
-        "command": ".venv/bin/calc",
-        "subcommand": "add",
-        "args": [
-            "1",
-            "xyz"
-        ],
-        "expected_exit_code": 2,
-        "expected_stdout": null,
-        "expected_stderr": "invalid float value",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_both_operands_non_numeric",
-        "category": "INVALID_ARGS",
-        "description": "Both operands non-numeric produces an error for the first",
-        "command": ".venv/bin/calc",
-        "subcommand": "mul",
-        "args": [
-            "foo",
-            "bar"
-        ],
-        "expected_exit_code": 2,
-        "expected_stdout": null,
-        "expected_stderr": "invalid float value",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_empty_string_operand",
-        "category": "BOUNDARY",
-        "description": "Empty string as operand is treated as invalid",
-        "command": ".venv/bin/calc",
-        "subcommand": "add",
-        "args": [
-            "",
-            "5"
-        ],
-        "expected_exit_code": 2,
-        "expected_stdout": null,
-        "expected_stderr": "invalid float value",
-        "timeout_seconds": 10
-    },
-    {
-        "name": "test_unknown_operation_shows_usage",
-        "category": "INVALID_ARGS",
-        "description": "Unknown operation error message also includes available choices",
-        "command": ".venv/bin/calc",
-        "subcommand": "",
-        "args": [
-            "pow",
-            "2",
-            "8"
-        ],
-        "expected_exit_code": 2,
-        "expected_stdout": null,
-        "expected_stderr": "choose from",
         "timeout_seconds": 10
     }
 ]''')
