@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-25T17:45:19.353860+00:00
+Generated at: 2026-02-25T17:52:40.903288+00:00
 Project: calculator-cli-shay
 Milestone: 2
 """
@@ -37,15 +37,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Addition of two positive integers produces correct result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "5",
             "3"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "8",
+        "expected_stdout": "8.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -53,15 +52,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Subtraction of two positive integers produces correct result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "sub",
         "args": [
-            "calculator.py",
-            "sub",
             "10",
             "4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "6",
+        "expected_stdout": "6.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -69,15 +67,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Multiplication of two positive integers produces correct result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "mul",
         "args": [
-            "calculator.py",
-            "mul",
             "6",
             "7"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "42",
+        "expected_stdout": "42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -85,15 +82,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_positive_integers",
         "category": "HAPPY_PATH",
         "description": "Division of two positive integers produces correct result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "div",
         "args": [
-            "calculator.py",
-            "div",
             "20",
             "4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "5",
+        "expected_stdout": "5.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -101,15 +97,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Addition with negative numbers works correctly",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "-5",
             "3"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-2",
+        "expected_stdout": "-2.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -117,15 +112,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Subtraction of two negative numbers works correctly",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "sub",
         "args": [
-            "calculator.py",
-            "sub",
             "-10",
             "-4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-6",
+        "expected_stdout": "-6.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -133,15 +127,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Multiplication with a negative number produces correct negative result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "mul",
         "args": [
-            "calculator.py",
-            "mul",
             "-6",
             "7"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-42",
+        "expected_stdout": "-42.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -149,15 +142,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_negative_numbers",
         "category": "HAPPY_PATH",
         "description": "Division with a negative dividend produces correct negative result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "div",
         "args": [
-            "calculator.py",
-            "div",
             "-20",
             "4"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "-5",
+        "expected_stdout": "-5.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -165,15 +157,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_floating_point",
         "category": "HAPPY_PATH",
         "description": "Addition of floating-point numbers produces correct result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "1.5",
             "2.5"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "4",
+        "expected_stdout": "4.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -181,10 +172,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_non_integer_result",
         "category": "HAPPY_PATH",
         "description": "Division producing a floating-point result displays correctly",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "div",
         "args": [
-            "calculator.py",
-            "div",
             "7",
             "2"
         ],
@@ -197,15 +187,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_add_zeros",
         "category": "BOUNDARY",
         "description": "Addition with zeros produces correct result",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "0",
             "0"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0",
+        "expected_stdout": "0.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -213,15 +202,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_mul_by_zero",
         "category": "BOUNDARY",
         "description": "Multiplication by zero produces zero",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "mul",
         "args": [
-            "calculator.py",
-            "mul",
             "100",
             "0"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0",
+        "expected_stdout": "0.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -229,15 +217,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_sub_equal_numbers",
         "category": "BOUNDARY",
         "description": "Subtraction of equal numbers produces zero",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "sub",
         "args": [
-            "calculator.py",
-            "sub",
             "42",
             "42"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "0",
+        "expected_stdout": "0.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -245,15 +232,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_one",
         "category": "BOUNDARY",
         "description": "Division by one returns the dividend unchanged",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "div",
         "args": [
-            "calculator.py",
-            "div",
             "99",
             "1"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "99",
+        "expected_stdout": "99.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -261,15 +247,14 @@ TEST_CASES = json.loads(r'''[
         "name": "test_large_numbers",
         "category": "BOUNDARY",
         "description": "Operations with large numbers work correctly",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "1000000",
             "2000000"
         ],
         "expected_exit_code": 0,
-        "expected_stdout": "3000000",
+        "expected_stdout": "3000000.0",
         "expected_stderr": null,
         "timeout_seconds": 10
     },
@@ -277,10 +262,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_very_small_float",
         "category": "BOUNDARY",
         "description": "Operations with very small floating-point numbers work correctly",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "mul",
         "args": [
-            "calculator.py",
-            "mul",
             "0.001",
             "0.001"
         ],
@@ -293,41 +277,39 @@ TEST_CASES = json.loads(r'''[
         "name": "test_div_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division by zero produces an error message and non-zero exit code",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "div",
         "args": [
-            "calculator.py",
-            "div",
             "1",
             "0"
         ],
         "expected_exit_code": 1,
         "expected_stdout": null,
-        "expected_stderr": "divide by zero",
+        "expected_stderr": "Cannot divide by zero",
         "timeout_seconds": 10
     },
     {
         "name": "test_div_zero_by_zero",
         "category": "INVALID_ARGS",
         "description": "Division of zero by zero also produces division-by-zero error",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "div",
         "args": [
-            "calculator.py",
-            "div",
             "0",
             "0"
         ],
         "expected_exit_code": 1,
         "expected_stdout": null,
-        "expected_stderr": "divide by zero",
+        "expected_stderr": "Cannot divide by zero",
         "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation",
         "category": "INVALID_ARGS",
-        "description": "Unknown operation name produces error with operation name",
-        "command": "python3",
+        "description": "Unknown operation name produces error with invalid choice message",
+        "command": ".venv/bin/calc",
+        "subcommand": "",
         "args": [
-            "calculator.py",
             "foo",
             "1",
             "2"
@@ -341,9 +323,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_unknown_operation_mod",
         "category": "INVALID_ARGS",
         "description": "Unsupported operation 'mod' is rejected",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "",
         "args": [
-            "calculator.py",
             "mod",
             "10",
             "3"
@@ -357,69 +339,63 @@ TEST_CASES = json.loads(r'''[
         "name": "test_missing_all_args",
         "category": "INVALID_ARGS",
         "description": "No arguments at all produces usage text and non-zero exit",
-        "command": "python3",
-        "args": [
-            "calculator.py"
-        ],
+        "command": ".venv/bin/calc",
+        "subcommand": "",
+        "args": [],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "usage:",
+        "expected_stderr": "the following arguments are required",
         "timeout_seconds": 10
     },
     {
         "name": "test_missing_operands",
         "category": "INVALID_ARGS",
-        "description": "Operation with missing operands produces usage text and non-zero exit",
-        "command": "python3",
-        "args": [
-            "calculator.py",
-            "add"
-        ],
+        "description": "Operation with missing operands produces error and non-zero exit",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
+        "args": [],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "usage:",
+        "expected_stderr": "the following arguments are required",
         "timeout_seconds": 10
     },
     {
         "name": "test_missing_second_operand",
         "category": "INVALID_ARGS",
-        "description": "Operation with only one operand produces usage text and non-zero exit",
-        "command": "python3",
+        "description": "Operation with only one operand produces error and non-zero exit",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "1"
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "usage:",
+        "expected_stderr": "the following arguments are required",
         "timeout_seconds": 10
     },
     {
         "name": "test_too_many_args",
         "category": "INVALID_ARGS",
-        "description": "Extra arguments beyond the expected three produce usage text and non-zero exit",
-        "command": "python3",
+        "description": "Extra arguments beyond the expected three produce error and non-zero exit",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "1",
             "2",
             "3"
         ],
         "expected_exit_code": 2,
         "expected_stdout": null,
-        "expected_stderr": "usage:",
+        "expected_stderr": "unrecognized arguments",
         "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_first_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric first operand produces an error",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "abc",
             "2"
         ],
@@ -432,10 +408,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_non_numeric_second_operand",
         "category": "INVALID_ARGS",
         "description": "Non-numeric second operand produces an error",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "1",
             "xyz"
         ],
@@ -448,10 +423,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_both_operands_non_numeric",
         "category": "INVALID_ARGS",
         "description": "Both operands non-numeric produces an error for the first",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "mul",
         "args": [
-            "calculator.py",
-            "mul",
             "foo",
             "bar"
         ],
@@ -464,10 +438,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_empty_string_operand",
         "category": "BOUNDARY",
         "description": "Empty string as operand is treated as invalid",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "add",
         "args": [
-            "calculator.py",
-            "add",
             "",
             "5"
         ],
@@ -480,9 +453,9 @@ TEST_CASES = json.loads(r'''[
         "name": "test_unknown_operation_shows_usage",
         "category": "INVALID_ARGS",
         "description": "Unknown operation error message also includes available choices",
-        "command": "python3",
+        "command": ".venv/bin/calc",
+        "subcommand": "",
         "args": [
-            "calculator.py",
             "pow",
             "2",
             "8"
@@ -495,7 +468,7 @@ TEST_CASES = json.loads(r'''[
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "source .venv/bin/activate && calc add 1 1"
+CLI_COMMAND = ".venv/bin/calc"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
