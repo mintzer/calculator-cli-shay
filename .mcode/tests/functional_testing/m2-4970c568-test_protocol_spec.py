@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-02-25T17:59:18.433464+00:00
+Generated at: 2026-02-25T18:05:43.619225+00:00
 Project: calculator-cli-shay
 Milestone: 2
 """
@@ -46,8 +46,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "8.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "8.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_positive_integers",
@@ -62,8 +61,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "6.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "6.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_positive_integers",
@@ -78,8 +76,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "42.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "42.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_positive_integers",
@@ -94,8 +91,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "5.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "5.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_negative_numbers",
@@ -110,8 +106,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-2.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-2.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_negative_numbers",
@@ -126,8 +121,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-6.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-6.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_negative_numbers",
@@ -142,8 +136,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-42.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-42.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_negative_numbers",
@@ -158,8 +151,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-5.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-5.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_floating_point",
@@ -174,8 +166,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "4.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "4.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_non_integer_result",
@@ -190,8 +181,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "3.5",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "3.5\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_zeros",
@@ -206,8 +196,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_by_zero",
@@ -222,8 +211,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_equal_numbers",
@@ -238,8 +226,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_one",
@@ -254,8 +241,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "99.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "99.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_large_numbers",
@@ -270,8 +256,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "3000000.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "3000000.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_very_small_float",
@@ -286,8 +271,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "1e-06",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "1e-06\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_by_zero",
@@ -302,8 +286,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 1,
         "expected_stdout": null,
         "expected_stderr": "Cannot divide by zero",
-        "timeout_seconds": 10,
-        "actual_stderr": "Error: Cannot divide by zero\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_zero_by_zero",
@@ -318,8 +301,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 1,
         "expected_stdout": null,
         "expected_stderr": "Cannot divide by zero",
-        "timeout_seconds": 10,
-        "actual_stderr": "Error: Cannot divide by zero\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation",
@@ -335,8 +317,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid choice",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument operation: invalid choice: 'foo' (choose from add, sub, mul, div)\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation_mod",
@@ -352,8 +333,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid choice",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument operation: invalid choice: 'mod' (choose from add, sub, mul, div)\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_missing_all_args",
@@ -365,8 +345,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: operation, a, b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_missing_operands",
@@ -378,8 +357,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: a, b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_missing_second_operand",
@@ -393,8 +371,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_too_many_args",
@@ -410,8 +387,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "unrecognized arguments",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: unrecognized arguments: 3\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_first_operand",
@@ -426,8 +402,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument a: invalid float value: 'abc'\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_second_operand",
@@ -442,8 +417,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument b: invalid float value: 'xyz'\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_both_operands_non_numeric",
@@ -458,8 +432,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument a: invalid float value: 'foo'\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_empty_string_operand",
@@ -474,8 +447,7 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument a: invalid float value: ''\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_unknown_operation_shows_usage",
@@ -491,13 +463,12 @@ TEST_CASES = json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "choose from",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument operation: invalid choice: 'pow' (choose from add, sub, mul, div)\n"
+        "timeout_seconds": 10
     }
 ]''')
 
 # CLI binary/entry point
-CLI_COMMAND = "source .venv/bin/activate && calc add 1 1"
+CLI_COMMAND = ".venv/bin/calc add 1 1"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
