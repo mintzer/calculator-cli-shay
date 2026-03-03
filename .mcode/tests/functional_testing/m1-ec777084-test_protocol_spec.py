@@ -9,7 +9,7 @@ This script supports two modes:
 1. SRC Validation: Tests commands and captures outputs (no expected_stdout/stderr)
 2. DST Contract Validation: Tests commands and validates outputs match expected
 
-Generated at: 2026-03-03T18:31:08.361188+00:00
+Generated at: 2026-03-03T18:37:37.609070+00:00
 Project: calculator-cli-shay
 Milestone: 1
 """
@@ -63,8 +63,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "usage:",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "usage: calc [-h] {add,sub,mul,div} a b\n\nSimple CLI Calculator\n\npositional arguments:\n  {add,sub,mul,div}  Operation to perform\n  a                  First number\n  b                  Second number\n\noptions:\n  -h, --help         show this help message and exit\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_help_flag_short",
@@ -78,8 +77,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "usage:",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "usage: calc [-h] {add,sub,mul,div} a b\n\nSimple CLI Calculator\n\npositional arguments:\n  {add,sub,mul,div}  Operation to perform\n  a                  First number\n  b                  Second number\n\noptions:\n  -h, --help         show this help message and exit\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_integers",
@@ -95,8 +93,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "8.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "8.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_integers",
@@ -112,8 +109,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "7.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "7.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_integers",
@@ -129,8 +125,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "20.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "20.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_integers",
@@ -146,8 +141,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "5.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "5.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_negative_numbers",
@@ -163,8 +157,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-10.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-10.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_negative_result",
@@ -180,8 +173,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-7.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-7.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_mixed_sign",
@@ -197,8 +189,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_fractional",
@@ -214,8 +205,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "3.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "3.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_fractional",
@@ -231,8 +221,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "10.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "10.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_fractional_result",
@@ -248,8 +237,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "3.3333333333333335",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "3.3333333333333335\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_fractional",
@@ -265,8 +253,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "3.2",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "3.2\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_by_zero",
@@ -282,8 +269,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_add_zero",
@@ -299,8 +285,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "7.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "7.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_by_zero",
@@ -316,8 +301,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 1,
         "expected_stdout": null,
         "expected_stderr": "Cannot divide by zero",
-        "timeout_seconds": 10,
-        "actual_stderr": "Error: Cannot divide by zero\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_zero_by_zero",
@@ -333,8 +317,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 1,
         "expected_stdout": null,
         "expected_stderr": "Cannot divide by zero",
-        "timeout_seconds": 10,
-        "actual_stderr": "Error: Cannot divide by zero\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_negative_by_zero",
@@ -350,8 +333,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 1,
         "expected_stdout": null,
         "expected_stderr": "Cannot divide by zero",
-        "timeout_seconds": 10,
-        "actual_stderr": "Error: Cannot divide by zero\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_invalid_operation",
@@ -367,8 +349,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid choice",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument operation: invalid choice: 'foo' (choose from add, sub, mul, div)\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_invalid_operation_modulo",
@@ -384,8 +365,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid choice",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument operation: invalid choice: 'mod' (choose from add, sub, mul, div)\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_missing_all_args",
@@ -397,8 +377,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: operation, a, b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_missing_operands",
@@ -412,8 +391,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: a, b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_missing_second_operand",
@@ -428,8 +406,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_first_operand",
@@ -445,8 +422,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument a: invalid float value: 'one'\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_non_numeric_second_operand",
@@ -462,8 +438,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument b: invalid float value: 'abc'\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_both_operands_non_numeric",
@@ -479,8 +454,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "invalid float value",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: argument a: invalid float value: 'foo'\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_extra_arguments",
@@ -497,8 +471,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "unrecognized arguments",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: unrecognized arguments: 3\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_unknown_option_long",
@@ -515,8 +488,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "unrecognized arguments",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: unrecognized arguments: --unknown\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_unknown_option_short",
@@ -533,8 +505,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "unrecognized arguments",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: unrecognized arguments: -x\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_version_flag_not_supported",
@@ -548,8 +519,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 2,
         "expected_stdout": null,
         "expected_stderr": "the following arguments are required",
-        "timeout_seconds": 10,
-        "actual_stderr": "usage: calc [-h] {add,sub,mul,div} a b\ncalc: error: the following arguments are required: operation, a, b\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_large_numbers",
@@ -565,8 +535,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "1000000000000.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "1000000000000.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_very_small_fractional",
@@ -582,8 +551,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0003",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.00030000000000000003\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_negative_times_negative",
@@ -599,8 +567,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "12.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "12.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_sub_same_number",
@@ -616,8 +583,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_one",
@@ -633,8 +599,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "7.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "7.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_negative_divisor",
@@ -650,8 +615,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "-5.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "-5.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_mul_by_one",
@@ -667,8 +631,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "99.5",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "99.5\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_div_zero_by_nonzero",
@@ -684,8 +647,7 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "0.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "0.0\n"
+        "timeout_seconds": 10
     },
     {
         "name": "test_scientific_notation_input",
@@ -701,13 +663,12 @@ TEST_CASES = resolve_env_placeholders(json.loads(r'''[
         "expected_exit_code": 0,
         "expected_stdout": "105.0",
         "expected_stderr": null,
-        "timeout_seconds": 10,
-        "actual_stdout": "105.0\n"
+        "timeout_seconds": 10
     }
 ]'''))
 
 # CLI binary/entry point
-CLI_COMMAND = "echo " ""
+CLI_COMMAND = ".venv/bin/calc"
 
 # Working directory for CLI execution
 WORKING_DIR = "."
